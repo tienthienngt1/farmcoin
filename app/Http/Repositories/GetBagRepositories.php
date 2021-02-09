@@ -10,23 +10,23 @@ trait GetBagRepositories
   
   public function GetBagUser()
   {
-    return json_decode($this->getUser()->bag);
-  }
-  
-  public function GetNameVetBag($id)
-  {
-    return json_decode($this->getUser()->bag)->vet->$id->name;
+    return json_decode($this->getUser()->bag)->vet;
   }
   
   public function GetQuantityVetBag($id)
   {
-    return json_decode($this->getUser()->bag)->vet->$id->quantity;
+    if(empty(json_decode($this->GetBagUser()->$id))){
+    return null;
+    }
+      return json_decode($this->GetBagUser()->$id)->quantity;
   }
   
-  public function GetNamePetBag($id)
+  public function GetIdVetBag($id)
   {
-    $namePet = $this->getRecordVet($id)->name;
-    return json_decode($this->getUser()->bag)->pet->$namePet;
+    if( !isset($this->GetBagUser()->$id)){
+      return null;
+    }
+    return $this->GetBagUser()->$id;
   }
   
 }

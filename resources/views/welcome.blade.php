@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container-fluid">
-    <div class="row justify-content-center shadow p-3">
+    <div class="row justify-content-center p-3">
         <div class="col-md-12">
           <img src="{{ asset('images/autumn.png') }}" tittle="background" width="100%"/>
         </div>

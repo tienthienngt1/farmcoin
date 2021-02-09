@@ -24,8 +24,10 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view::composer('home.farm','App\Http\ViewComposers\GetVetComposer');
+        view::composer('*','App\Http\ViewComposers\GetUserComposer');
+        view::composer(['home.farm','home.bag','home.shop'],'App\Http\ViewComposers\GetVetComposer');
         view::composer('home.farm','App\Http\ViewComposers\GetFarmComposer');
         view::composer('home.bag','App\Http\ViewComposers\GetBagComposer');
+        view::composer('home.shop','App\Http\ViewComposers\GetPetComposer');
     } 
 }

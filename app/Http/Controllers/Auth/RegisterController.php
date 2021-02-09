@@ -81,8 +81,14 @@ class RegisterController extends Controller
           'role' => json_encode(['auth' => 1,'levelFarm' => 1,'levelPet' => 1,'roleForum' => 1,
           ]),
           'bag' => json_encode([
-            'vet' => ['1'=>['name'=>null,'quantity'=>null],'2'=>['name'=>null,'quantity'=>null],'3'=>['name'=>null,'quantity'=>null],'4'=>['name'=>null,'quantity'=>null],'5'=>['name'=>null,'quantity'=>null],'6'=>['name'=>null,'quantity'=>null],'7'=>['name'=>null,'quantity'=>null],'8'=>['name'=>null,'quantity'=>null],],
+            'vet' => ['1'=>null,'2'=>null,'3'=>null,'4'=>null,'5'=>null,'6'=>null,'7'=>null,'8'=>null],
             'pet' => null,
+          ]),
+          'money' => json_encode([
+            'balance' => 0,
+            'pending' => 0,
+            'withdraw' => 0,
+            'referal' => 0,
           ]),
           'farm' => json_encode(['farm1s' => ['field1' => null,'field2' => null,'field3' => null,'field4' => null,'field1Time' => null,'field2Time' => null,'field3Time' => null,'field4Time' => null,
             ],'farm2s' => ['field5' => null,'field6' => null,'field7' => null,'field8' => null,'field5Time' => null,'field6Time' => null,'field7Time' => null,'field8Time' => null,],'farm2sRole'=> ['field5' => null,'field6' => null,'field7' => null,'field8' => null,]

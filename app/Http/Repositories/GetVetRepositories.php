@@ -21,9 +21,5 @@ trait GetVetRepositories
   {
     return DB::table('vetgetables')->where('id',$id)->first();
   }
-   
-  public function getNameVet($id)
-  {
-    return;
-  }
+
 }

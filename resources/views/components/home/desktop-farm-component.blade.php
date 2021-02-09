@@ -40,11 +40,3 @@
   </div>
 </div>
 </div>
-<div class="mt-3"></div>
-<a class="mt_5" href="{{ route('home') }}">
-      <image src="{{ asset('images/exit.png') }}" tittle="bag" width="14%"/>
-</a>
-<div>
-  <image src="{{ asset('images/grass.png') }}" tittle="grass" width="100%" height="200px"/>
-</div>
-

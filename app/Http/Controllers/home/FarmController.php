@@ -90,45 +90,43 @@ class FarmController extends Controller
     public function handleHarvest($request, $id)
     {
       $field = $this->getField($id);
-      $nameVet = $this->getNameVetBag($field);
+      $nameVet = $this->getRecordVet($field)->name;
+      
       if($field === null){
         return $this->redirectFarm();
       }
       
-      if($nameVet === null){
-        $updateBag = DB::table('users')->where('id',Auth::user()->id)->update([
-            'bag->vet->'.$field.'->name' => $this->getRecordVet($field)->name,
-            'bag->vet->'.$field.'->quantity' => 1 ,
-          ]);
-          
-        $updateFarm = DB::table('users')->where('id',Auth::user()->id)->update([
-          'farm->farm1s->field'.$id => null,
-          'farm->farm1s->field'.$id.'Time' => null,
-        ]);
-        Session::flash('notify','Thu hoạch thành công');
-        
+      if($this->getIdVetBag($field) === null){
+        $data = [
+          'bag->vet->'.$field => json_encode([
+             'cost' => $this->getRecordVet($field)->sell,
+             'path' => $this->getRecordVet($field)->icon,
+             'name' => $nameVet,
+             'quantity' => 1,
+          ]),
+        ];
       }else{
-        
-        $updateBag = DB::table('users')->where('id',Auth::user()->id)->update([
-             'bag->vet->'.$field.'->quantity' => $this->getQuantityVetBag($field) +1,
-           ]);
-         
-        $updateFarm = DB::table('users')->where('id',Auth::user()->id)->update([
-          'farm->farm1s->field'.$id => null,
-          'farm->farm1s->field'.$id.'Time' => null,
-        ]);
-        
-        Session::flash('notify','Thu hoạch thành công');
+        $data = [
+          'bag->vet->'.$field => json_encode([
+             'cost' => $this->getRecordVet($field)->sell,
+             'path' => $this->getRecordVet($field)->icon,
+             'name' => $nameVet,
+             'quantity' => $this->getQuantityVetBag($field) + 1
+          ]),
+        ];
       }
-        return $this->redirectFarm();
       
-    }
-    
-    public function viewBag($id)
-    {
-      $get_fl = DB::table('bags')->where('id', Auth::user()->id)->get();
-      $get_vet = DB::table('vetgetables')->where('id','<=',$get_fl->farm_level)->get();
-        return view('home.bag',['id'=>$id,'get_vet'=>$get_vet]);
+      $this->updateUser($data);
+      $this->updateUser([
+        'farm->farm1s->field'.$id => null,
+        'farm->farm1s->field'.$id.'Time' => null,
+      ]);
+      $this->updateUser([
+        'exp' => $this->getRecordVet($field)->exp,
+      ]);
+      
+      Session::flash('notify','Thu hoạch thành công');
+      return $this->redirectFarm();
     }
    
 }

@@ -1,21 +1,15 @@
 
-  <!-- display sm up -->
-<div class="d-sm-none">
-  <div class="d-flex justify-content-beetwen" style="height:100px">
-    <a href="#" class="float_right">
-    <div style="position: absolute">
-      <image src="{{ asset('images/card.png') }}" tittle="bag" width="20%"/>
-    </div>
-    <span class="text-center" style="position: relative; color: #6b3b07; left: 20px; top: 3px; font-size: 16px">
-      Mua <br> Đất
-    </span>
+<div>
+  <div style="height:100px">
+    <a href="{{ route('home') }}">
+          <image src="{{ asset('images/exit.png') }}" tittle="bag" width="14%"/>
     </a>
   </div>
-  <div class="d-flex justify-content-beetwen">
+  <div class="row justify-content-center">
   
   <!--========≠==≠=1=≠====≠≠=-->
   
-    <div>
+    <div class="col-3">
       @isset($getFarm)
       @isset($getVet)
       @php
@@ -30,23 +24,33 @@
         foreach($getVet as $vet){
           if($vet->id == $getFarm->farm1s->field1){
            $icon1 = $vet->icon;
+           $name1 = $vet->name;
           }
           if($vet->id == $getFarm->farm1s->field2){
            $icon2 = $vet->icon;
+           $name2 = $vet->name;
           }
           if($vet->id == $getFarm->farm1s->field3){
            $icon3 = $vet->icon;
+           $name3 = $vet->name;
           }
           if($vet->id == $getFarm->farm1s->field4){
            $icon4 = $vet->icon;
+           $name4 = $vet->name;
           }
         }
       @endphp
       @if($getFarm->farm1s->field1 !== null)
         @if($time1 > 0)
-        <div id="harvest1">
+        <div id="harvest1" style="">
           <image src="{{ asset('images/sapling.png') }}" tittle="icon" width="100%" height="70px"/><br>
-          <i class="far fa-clock mr-1"></i><span style="font-size:9px" id="clock1"></span>
+          <span class="row justify-content-center" style="color:#5b1111">
+            {{ $name1 }}<br>
+          </span>
+            <div class="row justify-content-center">
+              <i class="far fa-clock"></i>
+              <span style="font-size:9px" id="clock1"></span>
+            </div>
         </div>
         @else
           <form method="post" action = "{{ route('farm.select.post',['id'=>'1']) }}">
@@ -67,7 +71,7 @@
   
   <!--========≠==≠2==≠====≠≠=-->
   
-    <div>
+    <div class="col-3">
       @php
         $time2 = "";
         if(isset($getFarm->farm1s->field2Time)){
@@ -77,13 +81,18 @@
       @if($getFarm->farm1s->field2 !== null)
         @if($time2 > 0)
         <div id="harvest2">
-          <image src="{{ asset('images/sapling.png') }}" tittle="bag" width="100%" height="70px"/><br>
-          <i class="far fa-clock mr-1"></i><span style="font-size:9px" id="clock2"></span>
+          <image src="{{ asset('images/sapling.png') }}" tittle="bag" width="90%" height="70px"/><br>
+          <span class="row justify-content-center" style="color:#5b1111">{{ $name2 }}<br>
+          </span>
+            <div class="row justify-content-center">
+              <i class="far fa-clock"></i>
+              <span style="font-size:9px" id="clock2"></span>
+            </div>
         </div>
         @else
           <form method="post" action = "{{ route('farm.select.post',['id'=>'2']) }}">
             @csrf
-            <image src="{{ asset($icon2) }}" tittle="bag" width="100%" height="70px"/><br>
+            <image src="{{ asset($icon2) }}" tittle="bag" width="90%" height="70px"/><br>
             <input type="submit" class="btn btn-link" value="Thu hoạch" name="harvest"/>
           </form>
         @endif
@@ -91,7 +100,7 @@
           
       <form method="post" action = "{{ route('farm.select.post',['id'=>'2']) }}">
         @csrf
-        <image src="{{ asset('images/farm.png') }}" tittle="bag" width="100%" height="70px"/><br>
+        <image src="{{ asset('images/farm.png') }}" tittle="bag" width="90%" height="70px"/><br>
         <input type="submit" class="btn btn-link" name="plant" value="Gieo hạt" />
       </form>
       @endif
@@ -99,7 +108,7 @@
   
   <!--========≠==3≠==≠====≠≠=-->
   
-  <div>
+  <div class="col-3">
       @php
         $time3 = "";
         if(isset($getFarm->farm1s->field3Time)){
@@ -109,13 +118,18 @@
       @if($getFarm->farm1s->field3 !== null)
         @if($time3 > 0)
         <div id="harvest3">
-          <image src="{{ asset('images/sapling.png') }}" tittle="bag" width="100%" height="70px"/><br>
-          <i class="far fa-clock mr-1"></i><span style="font-size:9px" id="clock3"></span>
+          <image src="{{ asset('images/sapling.png') }}" tittle="bag" width="90%" height="70px"/><br>
+          <span class="row justify-content-center" style="color:#5b1111">{{ $name3 }}<br>
+          </span>
+            <div class="row justify-content-center">
+              <i class="far fa-clock"></i>
+              <span style="font-size:9px" id="clock3"></span>
+            </div>
         </div>
         @else
           <form method="post" action = "{{ route('farm.select.post',['id'=>'3']) }}">
             @csrf
-            <image src="{{ asset($icon3) }}" tittle="bag" width="100%" height="70px"/><br>
+            <image src="{{ asset($icon3) }}" tittle="bag" width="90%" height="70px"/><br>
             <input type="submit" class="btn btn-link" value="Thu hoạch" name="harvest"/>
           </form>
         @endif
@@ -123,7 +137,7 @@
           
       <form method="post" action = "{{ route('farm.select.post',['id'=>'3']) }}">
         @csrf
-        <image src="{{ asset('images/farm.png') }}" tittle="bag" width="100%" height="70px"/><br>
+        <image src="{{ asset('images/farm.png') }}" tittle="bag" width="90%" height="70px"/><br>
         <input type="submit" class="btn btn-link" name="plant" value="Gieo hạt" />
       </form>
       @endif
@@ -131,7 +145,7 @@
   
   <!--========≠==4≠==≠====≠≠=-->
   
-  <div>
+  <div class="col-3">
       @php
         $time4 = "";
         if(isset($getFarm->farm1s->field4Time)){
@@ -141,14 +155,19 @@
       @if($getFarm->farm1s->field4 !== null)
         @if($time4 > 0)
         <div id="harvest4">
-          <image src="{{ asset('images/sapling.png') }}" tittle="bag" width="100%" height="70px"/><br>
-          <i class="far fa-clock mr-1"></i><span style="font-size:9px" id="clock4"></span>
+          <image src="{{ asset('images/sapling.png') }}" tittle="bag" width="90%" height="70px"/><br>
+          <span class="row justify-content-center" style="color:#5b1111">{{ $name4 }}<br>
+          </span>
+            <div class="row justify-content-center">
+              <i class="far fa-clock"></i>
+              <span style="font-size:9px" id="clock4"></span>
+            </div>
         </div>
         @else
         <div id="harvest"></div>
           <form method="post" action = "{{ route('farm.select.post',['id'=>'4']) }}">
             @csrf
-            <image src="{{ asset($icon4) }}" tittle="bag" width="100%" height="70px"/><br>
+            <image src="{{ asset($icon4) }}" tittle="bag" width="90%" height="70px"/><br>
             <input type="submit" class="btn btn-link" value="Thu hoạch" name="harvest"/>
           </form>
         @endif
@@ -156,15 +175,20 @@
         
       <form method="post" action = "{{ route('farm.select.post',['id'=>'4']) }}">
         @csrf
-        <image src="{{ asset('images/farm.png') }}" tittle="bag" width="100%" height="70px"/><br>
+        <image src="{{ asset('images/farm.png') }}" tittle="bag" width="90%" height="70px"/><br>
         <input type="submit" class="btn btn-link" name="plant" value="Gieo hạt" />
       </form>
       @endif
     @endisset
     @endisset
   </div>
-  
 </div>
+
+  <div class="mt-5"></div>
+ 
+  <div class="row justify-content-center">
+    <image src="{{ asset('images/grass.png') }}" tittle="grass" width="100%" height="200px"/>
+  </div>
 
 </div>
 
@@ -191,8 +215,8 @@ var x1 = setInterval(function() {
     `;
   }
 }, 1000);
-
-//=====================================
+</script>
+<script>
 var time2 = {{ strtotime($getFarm->farm1s->field2Time) }};
 var x2 = setInterval(function() {
   var a2 = new Date().getTime() ;
@@ -214,8 +238,8 @@ var x2 = setInterval(function() {
     `;
   }
 }, 1000);
-
-//=====================================
+</script>
+<script>
 var time3 = {{ strtotime($getFarm->farm1s->field3Time) }};
 var x3 = setInterval(function() {
   var a3 = new Date().getTime() ;
@@ -237,8 +261,8 @@ var x3 = setInterval(function() {
   `;
   }
 }, 1000);
-
-//=====================================
+</script>
+<script>
 var time4 = {{ strtotime($getFarm->farm1s->field4Time) }};
 var x4 = setInterval(function() {
   var a4 = new Date().getTime() ;

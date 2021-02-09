@@ -1,6 +1,7 @@
 
+<div class="row justify-content-center">
 <nav class="navbar navbar-expand-md mt-4">
-  <div class="collapse navbar-collapse shadow p-3">
+  <div class="collapse navbar-collapse p-3">
     <!-- left Side Of Navbar -->
     <ul class="navbar-nav mr-auto">
     <center>
@@ -32,3 +33,4 @@
   </ul>
   </div>
 </nav>
+  </div>

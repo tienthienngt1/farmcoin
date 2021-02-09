@@ -11,7 +11,7 @@ trait GetFarmRepositories
   
   public function getFarm()
   {
-    return json_decode($this->getUser(Auth::user()->id)->farm);
+    return json_decode($this->getUser()->farm);
   }
   
   public function getLevelFarm()

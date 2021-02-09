@@ -2,6 +2,7 @@
 
 namespace App\Http\Repositories;
 
+use App\Models\User;
 use DB,Auth;
 
 trait GetUserRepositories
@@ -9,6 +10,14 @@ trait GetUserRepositories
   
   public function getUser()
   {
-    return DB::table('users')->where('id',Auth::user()->id)->first();
+    if(Auth::user() === null){
+      return null;
+    };
+    return User::where('id',Auth::user()->id)->first();
+  }
+  
+  public function updateUser($data)
+  {
+    return User::where('id',Auth::user()->id)->update($data);
   }
 }

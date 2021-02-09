@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('level');
             $table->string('exp');
+            $table->json('money')->nullable();
             $table->json('role')->nullable();
             $table->json('farm')->nullable();
             $table->json('bag')->nullable();

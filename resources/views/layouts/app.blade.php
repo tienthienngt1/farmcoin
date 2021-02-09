@@ -12,6 +12,8 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/all.min.js') }}" defer></script>
+    <script src="{{ asset('js/jquery.min.js') }}" defer></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     
     <!-- Css -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -20,13 +22,11 @@
     
     <!--  toastify -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
     
 </head>
 <body>
-  
-  <div class="container-fluid">
+<div class="container" style="max-width:700px">
     <x-index.navbar-component />
     <div id="mySidenav" class="sidenav">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -43,8 +43,7 @@
     <div class = "row justify-content-center">
       Bản quyền thuộc farmcoin.xyz 2020
     </div>
-  </div>
-  
+    </div>
   <script>
   
 function openNav() {
@@ -78,6 +77,19 @@ $(document).ready(function(){
   gravity: "top",
   positionRight: true,
   backgroundColor: "#29b24b",
+  stopOnFocus: true,
+  onClick: function(){}
+}).showToast();
+@endif
+@if(Session::has('notifyError'))
+  Toastify({
+  text: "{{ Session::get('notifyError') }}",
+  duration: 5000,
+  newWindow: true,
+  close: true,
+  gravity: "top",
+  positionRight: true,
+  backgroundColor: "#c76561",
   stopOnFocus: true,
   onClick: function(){}
 }).showToast();

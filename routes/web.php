@@ -29,6 +29,8 @@ Route::view('contact','index.lienhe')->name('lienhe');
 Route::get('/test', [App\Http\Controllers\TestController::class, 'index']);
 Route::post('/test', [App\Http\Controllers\TestController::class, 'index']);
 
+//--------FORUM----------
+
 Route::prefix('forum')->group(function () {
   
     Route::get('/',[App\Http\Controllers\forum\ListController::class,'index'])->name('forum');
@@ -58,7 +60,15 @@ Route::group(['prefix' => 'home','middleware' => 'auth'],function ()
   
     Route::get('/', [App\Http\Controllers\home\HomeController::class, 'index'])->name('home');
 
+    //--------BAG----------
+
     Route::get('/bag', [App\Http\Controllers\home\HomeController::class, 'viewBag'])->name('home.bag');
+    
+    Route::post('/bag/{id}', [App\Http\Controllers\home\BagController::class, 'show'])->where(['id','[1-4]']);
+    
+    Route::get('/bag/{id}', [App\Http\Controllers\home\BagController::class, 'viewBag'])->where(['id','[1-4]']);
+    
+    //--------FARM----------
     
     Route::group(['prefix' => 'farm'],function () 
     {
@@ -67,5 +77,18 @@ Route::group(['prefix' => 'home','middleware' => 'auth'],function ()
         
         Route::post('/{id}', [App\Http\Controllers\home\FarmController::class, 'handleGrow'])->where('id','[1-4]')->name('farm.select.post');
         
+        Route::get('/{id}', [App\Http\Controllers\home\FarmController::class, 'redirectFarm'])->where('id','[1-4]');
     });
+    
+    //--------PET----------
+    
+    Route::group(['prefix' => 'pet'],function () 
+    {
+        Route::get('/', [App\Http\Controllers\home\PetController::class, 'index'])->name('home.pet');
+        
+    });
+    
+    //--------SHOP----------
+    
+    Route::resource('shop','App\Http\Controllers\home\ShopController');
 });
