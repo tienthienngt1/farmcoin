@@ -14,9 +14,7 @@ class TestServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('Test', function ($app){
-          return new TestRepositories();
-        });
+      
     }
 
     /**

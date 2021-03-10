@@ -2,17 +2,13 @@
 
 @section('content')
 
-<div class="container-fluid">
+<div class="container-fluid load-hidden body2">
     <div class="card bg-none mt-5">
       <div class="card-header">
         <h1>Khuyến mãi</h1>
       </div>
       <div class="card-body">
-          <a class="btn btn-link" href="#">
-            <h5>
-              Khuyến mãi tặng 100%
-            </h5>
-          </a>
+          <center><span style="opacity:0.5">Trống</span></center>
       </div>
     </div>
 </div>

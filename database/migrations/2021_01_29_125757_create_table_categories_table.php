@@ -21,6 +21,7 @@ class CreateTableCategoriesTable extends Migration
             $table->string('view');
             $table->string('like');
             $table->string('comment');
+            $table->string('image')->nullable();
             $table->string('tittle')->charset('utf8');
             $table->text('content')->charset('utf8');
             $table->timestamps();

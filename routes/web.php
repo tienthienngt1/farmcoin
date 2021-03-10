@@ -13,21 +13,19 @@ use App\Http\Controllers\forum\HoidapController;
 |
 */
 
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome'); 
 });
 
 Auth::routes();
 
 
-Route::view('new','index.new')->name('new');
 
 Route::view('khuyenmai','index.khuyenmai')->name('khuyenmai');
 
 Route::view('contact','index.lienhe')->name('lienhe');
 
-Route::get('/test', [App\Http\Controllers\TestController::class, 'index']);
-Route::post('/test', [App\Http\Controllers\TestController::class, 'index']);
 
 //--------FORUM----------
 
@@ -57,9 +55,12 @@ Route::prefix('forum')->group(function () {
 
 Route::group(['prefix' => 'home','middleware' => 'auth'],function () 
 {
-  
     Route::get('/', [App\Http\Controllers\home\HomeController::class, 'index'])->name('home');
+  
+//------------------------ RANK---------- ------
 
+    Route::resource('rank', 'App\Http\Controllers\home\rank\RankController');
+  
     //--------BAG----------
 
     Route::get('/bag', [App\Http\Controllers\home\HomeController::class, 'viewBag'])->name('home.bag');
@@ -84,11 +85,49 @@ Route::group(['prefix' => 'home','middleware' => 'auth'],function ()
     
     Route::group(['prefix' => 'pet'],function () 
     {
-        Route::get('/', [App\Http\Controllers\home\PetController::class, 'index'])->name('home.pet');
+        Route::resource('/', 'App\Http\Controllers\home\PetController');
+        
+        Route::resource('/warehouse', 'App\Http\Controllers\home\PetWarehouseController');
         
     });
     
-    //--------SHOP----------
+    //------------------SHOP----------
     
     Route::resource('shop','App\Http\Controllers\home\ShopController');
+    
+    //--------------REFFERAL-------------
+
+    Route::group(['prefix' => 'refferal'],function () 
+    {
+        Route::resource('/', 'App\Http\Controllers\home\refferal\RefferalController');
+    });
+    
+    //--------------SETTING-------------
+
+
+    Route::group(['prefix' => '/'],function () 
+    {
+        Route::resource('setting', 'App\Http\Controllers\home\setting\SettingController');
+    });
+
+    //--------------INFORMATION-------------
+
+    Route::group(['prefix' => 'info'],function () 
+    {
+        Route::resource('/', 'App\Http\Controllers\home\info\InforController');
+        
+    });
+
+    //--------------DEPOSIT-------------
+
+    
+    
+    //--------------WITHDRAW-------------
+    
+    Route::group(['prefix' => 'withdraw'],function () 
+    {
+        Route::resource('/', 'App\Http\Controllers\home\withdraw\WithdrawController');
+    });
+        
+    
 });

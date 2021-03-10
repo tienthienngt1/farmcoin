@@ -38,6 +38,9 @@ class BagController extends Controller
       if(isset($_POST['sell']))
       {
         $idVet =  json_decode($this->getIdVetBag($id));
+        if($idVet === null){
+          return $this->redirectBag();
+        }
         $quantity = $idVet->quantity;
         $cost = $idVet->cost;
         $totalCost = ($quantity * $cost)/1000;

@@ -20,6 +20,8 @@ class User extends Authenticatable
         'money',
         'role',
         'farm',
+        'phone',
+        'ip',
         'bag',
     ];
 
@@ -32,4 +34,18 @@ class User extends Authenticatable
         'id' => 'string',
     ];
     
+    public function refferal()
+    {
+      return $this->hasOne('App\Models\Refferal');
+    }
+    
+    public function refbuy()
+    {
+      return $this->hasOne('App\Models\home\refBuy', 'ref_id');
+    }
+    
+    public function info()
+    {
+      return $this->hasOne('App\Models\home\Info');
+    }
 }

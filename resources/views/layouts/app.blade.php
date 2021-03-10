@@ -3,35 +3,39 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta name="theme-color" content="#f2bfbf">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Farmcoin</title>
 
+    <!-- Scroll -->
+    <script src="{{ asset('js/scroll.js') }}"></script>
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/all.min.js') }}" defer></script>
     <script src="{{ asset('js/jquery.min.js') }}" defer></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    
     <!-- Css -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/awesome.css') }}" rel="stylesheet">
     <link type="text/css" href="{{ asset('css/index.css') }}" rel="stylesheet">
     
     <!--  toastify -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
     
 </head>
 <body>
 <div class="container" style="max-width:700px">
-    <x-index.navbar-component />
-    <div id="mySidenav" class="sidenav">
+  <div class="headline load-hidden">
+    <x-index.navbar-component :user="$user"/>
+  </div>
+    <div id="mySidenav" class="sidenav body1 load-hidden">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
       <!-- open nav -->
-      <x-index.header-component />
+      <x-index.header-component :user="$user"/>
       <x-index.menu-component />
       <!-- close nav -->
     </div>
@@ -40,7 +44,7 @@
       @yield('content')
     </main>
     <div style=" height: 10px"> </div>
-    <div class = "row justify-content-center">
+    <div class = "row justify-content-center bottom load-hidden">
       Bản quyền thuộc farmcoin.xyz 2020
     </div>
     </div>
@@ -70,8 +74,8 @@ $(document).ready(function(){
 
 @if(Session::has('notify'))
   Toastify({
-  text: "{{ Session::get('notify') }}",
-  duration: 5000,
+  text: "<i class='fas fa-check-circle'></i>{{ Session::get('notify') }}",
+  duration: 8000,
   newWindow: true,
   close: true,
   gravity: "top",
@@ -83,18 +87,26 @@ $(document).ready(function(){
 @endif
 @if(Session::has('notifyError'))
   Toastify({
-  text: "{{ Session::get('notifyError') }}",
-  duration: 5000,
+  text: "<i class='fas fa-exclamation-triangle'></i> {{ Session::get('notifyError') }}",
+  duration: 10000,
   newWindow: true,
   close: true,
   gravity: "top",
   positionRight: true,
   backgroundColor: "#c76561",
-  stopOnFocus: true,
+  stopOnFocus: false,
   onClick: function(){}
 }).showToast();
 @endif
   </script>
-  <script src="{{ asset('js/jquery.pjax.js') }}"></script>
+  <script>
+    ScrollReveal().reveal('.headline', { duration: 2000 });
+    ScrollReveal().reveal('.body1', { duration: 3000 });
+    ScrollReveal().reveal('.body2', { duration: 3500 });
+    ScrollReveal().reveal('.body3', { duration: 4000 });
+    ScrollReveal().reveal('.bottom', { duration: 5000 });
+    ScrollReveal().reveal('.widget', { interval: 200 });
+  </script>
+
 </body>
 </html>

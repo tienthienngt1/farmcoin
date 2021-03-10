@@ -11,9 +11,10 @@ class HeaderComponent extends Component
      *
      * @return void
      */
-    public function __construct()
+    public $user
+    public function __construct($user)
     {
-        //
+        $this->user->$user;
     }
 
     /**

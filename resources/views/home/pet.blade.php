@@ -1,40 +1,53 @@
 @extends('layouts.app')
 
-@section('content') 
+@section('content')
+@php 
+$time=strtotime($getPetBag->timePet);
+$path='';$name=''; $sell='';$exp='';
+@endphp
 
-<div>
-  <div style="height:100px">
-    <a href="{{ route('home') }}">
-          <image src="{{ asset('images/exit.png') }}" tittle="bag" width="14%"/>
-    </a>
+@foreach($pet as $pet)
+@if((int)$pet->id === (int)$getPetBag->statusPet)
+@php
+  $name = $pet->name;
+  $sell = $pet->sell;
+  $exp = $pet->exp;
+  $path = $pet->animation;
+@endphp
+
+@endif
+@endforeach
+<div class="body2 load-hidden">
+  <div class="row">
+    <div class="col-8">
+      <a href="{{ route('home') }}">
+            <image src="{{ asset('images/exit.png') }}" tittle="exit" width="30%"/>
+      </a>
+    </div>
+    <div class="col-4">
+      <a href="pet/warehouse">
+            <image src="{{ asset('images/close.png') }}" tittle="kho" width="80%"/>
+      </a>
+    </div>
   </div>
-  
-  <div class="row justify-content-center">
   <!--========≠==≠=1=≠====≠≠=-->
   
-  <div class="col-3">
-   <image src="{{asset('images/fence.png')}}" title="fence" width="100%"/>
-    
-  </div>
-  
-  <div class="col-3">
-    
-   <image src="{{asset('images/fence.png')}}" title="fence" width="100%"/>
-  </div>
-  
-  <div class="col-3">
-   <image src="{{asset('images/fence.png')}}" title="fence" width="100%"/>
-    
-  </div>
-  
-  <div class="col-3">
-   <image src="{{asset('images/fence.png')}}" title="fence" width="100%"/>
-    
-  </div>
-  
+  <div class="row backgroundPet" >
+    <image src="{{asset('images/backgroundPet.png')}}" title="background" width="100%"/><br>
+     <center>
+       @if($getPetBag -> statusPet !== null)
+       <div class="pet col-4" >
+         <image src="{{asset($path)}}"  width="50%"/><br>
+         <span id="sell" style="color:yellow">{{$sell/1000}} TH</span><br>
+         <span id ="clock"></span>
+       </div>
+       @else
+       <span class="pet" style="opacity:0.5; top:70%; left:30%">Bạn chưa nuôi con vật nào</span>
+       @endif
+     </center>
   </div>
  
-  <div class="d-flex justify-content-beetwen">
+  <div class="d-flex justify-content-beetwen mt-5">
    <image src="{{asset('images/fence.png')}}" title="fence" width="50%"/>
    <image src="{{asset('images/fence.png')}}" title="fence" width="50%"/>
   </div>
@@ -42,7 +55,7 @@
 
 <script>
 //=====================================
-var time1 = 10;
+var time1 = {{$time}};
 var x1 = setInterval(function() {
   var a1 = new Date().getTime() ;
   var now1 = Math.floor(a1 / 1000);
@@ -51,15 +64,15 @@ var x1 = setInterval(function() {
   var hours1 = Math.floor((sum1 % (60 * 24 * 60)) / ( 60 * 60 ));
   var minutes1 = Math.floor(((sum1 % (60 * 24 * 60)) % ( 60 * 60 )) / 60);
   var seconds1 = Math.floor(((sum1 % (60 * 24 * 60)) % ( 60 * 60 )) % 60);
-  document.getElementById("clock1").innerHTML = days1 + "d" + hours1 + "h" + minutes1 + "m" + seconds1 + "s";
+  document.getElementById("clock").innerHTML = days1 + "d" + hours1 + "h" + minutes1 + "m" + seconds1 + "s";
   if (sum1 < 0) {
     clearInterval(x1);
-    document.getElementById("harvest1").innerHTML = `
-       <form method="post" action = "{{ route('farm.select.post',['id'=>'1']) }}">
-          @csrf
-          <image src="{{ asset('') }}" tittle="bag" width="100%" height="70px"/><br>
-          <input type="submit" class="btn btn-link" value="Thu hoạch" name="harvest"/>
-        </form>
+    document.getElementById("clock").innerHTML = `
+       <form method="post">
+        @csrf
+        <input type="hidden" name="__id" value ="{{ $getPetBag->statusPet }}" />
+        <input type="submit" class="btn btn-primary" value="Bán" name="sellPet"/>
+      </form>
     `;
   }
 }, 1000);

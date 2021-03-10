@@ -6,11 +6,13 @@
       <i class="fas fa-tractor mr-2"></i>Trang trại
     </a>
   </li>
+  @auth
   <li class="list-group-item">
-    <a href="{{ route('new') }}">
-      <i class="fas fa-newspaper mr-2"></i>Tin tức
+    <a href="/home/withdraw">
+      <i class="fas fa-newspaper mr-2"></i>Rút Tiền
     </a>
   </li>
+  @endauth
   <li class="list-group-item">
     <a href="{{ route('forum') }}">
       <i class="fas fa-comment-dots mr-2"></i>Forum

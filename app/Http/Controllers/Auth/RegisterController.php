@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Session;
+use App\Http\Repositories\GetUserRepositories;
 
 class RegisterController extends Controller
 {
@@ -23,7 +24,7 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers;
+    use RegistersUsers, GetUserRepositories;
 
     /**
      * Where to redirect users after registration.
@@ -69,10 +70,12 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
+    protected function create(array $data, $request)
     {
-      session()->flash('notify','Đăng kí thành công!');
-      return User::create([
+      if($this->getIp($request->ip()) === null){
+        return User::create([
+          'ip' => $request->ip(),
+          'phone' => $_SERVER['HTTP_USER_AGENT'],
           'name' => addslashes(trim($data['name'])),
           'email' => addslashes(trim($data['email'])),
           'password' => Hash::make($data['password']),
@@ -82,7 +85,7 @@ class RegisterController extends Controller
           ]),
           'bag' => json_encode([
             'vet' => ['1'=>null,'2'=>null,'3'=>null,'4'=>null,'5'=>null,'6'=>null,'7'=>null,'8'=>null],
-            'pet' => null,
+            'pet' => ['statusPet' => null, 'timePet' => null],
           ]),
           'money' => json_encode([
             'balance' => 0,
@@ -93,7 +96,9 @@ class RegisterController extends Controller
           'farm' => json_encode(['farm1s' => ['field1' => null,'field2' => null,'field3' => null,'field4' => null,'field1Time' => null,'field2Time' => null,'field3Time' => null,'field4Time' => null,
             ],'farm2s' => ['field5' => null,'field6' => null,'field7' => null,'field8' => null,'field5Time' => null,'field6Time' => null,'field7Time' => null,'field8Time' => null,],'farm2sRole'=> ['field5' => null,'field6' => null,'field7' => null,'field8' => null,]
           ]),
-      ]);
-      
+        ]);
+      }
+      session()->flash('notifyError','Bạn không được đăng kí nhiều tài khoản trên cùng một thiết bị để tránh việc lạm dụng tài khoản. Xin cảm ơn!');
+      return null;
     }
 }

@@ -7,6 +7,10 @@ use DB,Auth;
 
 trait GetUserRepositories
 {
+  public function getIp($ip)
+  {
+    return User::where('ip',$ip)->first();
+  }
   
   public function getUser()
   {
@@ -16,8 +20,26 @@ trait GetUserRepositories
     return User::where('id',Auth::user()->id)->first();
   }
   
+  protected function getOrtherUser($id)
+  {
+    return User::where('id',$id)->first();
+  }
+  
   public function updateUser($data)
   {
     return User::where('id',Auth::user()->id)->update($data);
+  }
+  
+  protected function updateOrtherUser($id,$data)
+  {
+    return User::where('id',$id)->update($data);
+  }
+  
+  protected function getRank($value)
+  {
+    if($value === 'level'){
+      return User::orderBy($value, 'desc')->take(50)->get();
+    }
+    return User::orderBy('role->'.$value, 'desc')->take(50)->get();
   }
 }

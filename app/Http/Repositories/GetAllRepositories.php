@@ -7,10 +7,11 @@ use App\Http\Repositories\GetFarmRepositories;
 use App\Http\Repositories\GetUserRepositories;
 use App\Http\Repositories\GetBagRepositories;
 use App\Http\Repositories\GetMoneyRepositories;
+use App\Http\Repositories\GetPetRepositories;
 
 trait GetAllRepositories
 {
   
-  use GetVetRepositories, GetFarmRepositories, GetUserRepositories , GetBagRepositories, GetMoneyRepositories;
+  use GetVetRepositories, GetFarmRepositories, GetUserRepositories , GetBagRepositories, GetMoneyRepositories, GetPetRepositories;
   
 }

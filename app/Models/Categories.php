@@ -18,6 +18,7 @@ class Categories extends Model
         'view',
         'like',
         'comment',
+        'image',
     ];
 
 }

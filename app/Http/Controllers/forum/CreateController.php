@@ -37,24 +37,42 @@ class CreateController extends Controller
               'content.required' => 'Nội dung không được để trống',
               'content.max' => 'Nội dung không được quá 500 kí tự',
             ];
+            $image = null;
+            if($request->file('image')){
+             $arr=['jpg','png','jpeg'];
+              $name = explode('.',$request->image->getClientOriginalName());
+              $endname=end($name);
+              if(in_array($endname, $arr) === false){
+                return back()->withErrors('image'->'Chỉ chấp nhận hình ảnh jpg, png, jpeg');
+              }
+              dd($request->image);
+            }
             
-            $validator = $request->validate([
+            $request->validate([
               'tittle' => ['required','max:100'],
-              'content' => ['required','max:500'],
+              'content' => ['required','max:500']
             ],$mess);
             
-              Categories::create([
-                'id_user' => Auth::user()->id,
-                'category' => $id,
-                'hash' => md5(now()),
-                'tittle' => $request->tittle,
-                'content' => $request->content,
-                'like' => 0,
-                'view' => 0,
-                'comment' => 0,
-            ]);
-              session::flash('notify','Tạo bài viết thành công !');
-              return redirect('/forum/'.$id);
+            $request->file('image')->store('image');
+
+            $data = [
+              'id_user' => Auth::user()->id,
+              'category' => $id,
+              'hash' => md5(now()),
+              'tittle' => $request->tittle,
+              'content' => $request->content,
+              'like' => 0,
+              'view' => 0,
+              'comment' => 0,
+              'image' => $image,
+            ];
+            
+            
+            Categories::create($data);
+            
+            session::flash('notify','Tạo bài viết thành công !');
+            
+            return redirect('/forum/'.$id);
         };
         return redirect ($request->path());
     }

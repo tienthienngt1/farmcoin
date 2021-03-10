@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="body2 load-hidden">
      <a class="text-primary" href="{{ route('forum') }}">Forum</a>&nbsp/&nbsp<a class="text-primary" href="/forum/3">Trò chuyện</a>
     <div class="card bg-none mt-5 shadow">
       @isset($id)
@@ -21,14 +22,14 @@
         @endguest
         <hr />
            @isset($data)
-          @foreach($data as $data)
-          <a class="text-primary" href="/forum/{{ $data->category }}{{ $data->hash }}">
-            {{ $data->tittle }}
+          @foreach($data as $da)
+          <a class="text-primary" href="/forum/{{ $da->category }}{{ $da->hash }}">
+            {{ $da->tittle }}
           </a>
           <br>
-        bởi: {{ $data->name }} &nbsp|&nbsp<i class="fas fa-eye"></i> &nbsp{{ $data->view }}&nbsp|&nbsp<i class="fas fa-comment"></i> &nbsp{{ $data->comment }}&nbsp|&nbsp<i class="fas fa-thumbs-up"></i>&nbsp{{ $data->like }} 
+        bởi: {{ $da->name }} &nbsp|&nbsp<i class="fas fa-eye"></i> &nbsp{{ $da->view }}&nbsp|&nbsp<i class="fas fa-comment"></i> &nbsp{{ $da->comment }}&nbsp|&nbsp<i class="fas fa-thumbs-up"></i>&nbsp{{ $da->like }} 
         <br>
-          <small>{{ \carbon\carbon::parse($data->created_at)->diffForHumans() }}</small>
+          <small>{{ \carbon\carbon::parse($da->created_at)->diffForHumans() }}</small>
           
       <hr />
           @endforeach
@@ -36,5 +37,9 @@
       </div>
       @endisset
     </div>
+      <div class="d-flex justify-content-center">
+       {!! $data->links() !!}
+    </div>
+  </div>
 
 @endsection

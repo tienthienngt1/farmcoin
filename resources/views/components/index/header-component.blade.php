@@ -29,8 +29,8 @@
       </div>
     </center>
     <div class="row">
-      <div class="col-4"><h5>Level:59</h5></div>
-       <div class="col-8"><h5>Tài sản: 10000₫</h5></div>
+      <div class="col-4"><h5>Level:{{$user->level}}</h5></div>
+       <div class="col-8"><h5>Tài sản:{{json_decode($user->money)->balance}}TH</h5></div>
     </div>
   @endguest
 </div>

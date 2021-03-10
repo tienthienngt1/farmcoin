@@ -2,7 +2,7 @@
 
 <!--  display sm down -->
   
-<div class="d-none d-sm-block">
+<div class="d-none d-sm-block body2 load-hidden">
   <div style="height:150px">
     <a href="#" class="float_right">
     <div style="position: absolute">

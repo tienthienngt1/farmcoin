@@ -2,6 +2,9 @@
 
 @section('content')
 
+
+<div class="body3 load-hidden">
+
   <a class="text-primary" href="{{ route('forum') }}">Forum</a>&nbsp/&nbsp<a class="text-primary" href="/forum/1">Hỏi đáp</a>
       
 <div class="container">
@@ -14,7 +17,7 @@
               </a>
 
                 <div class="card-body">
-                    <form method="POST" action="">
+                    <form id="form" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">
@@ -42,7 +45,15 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="form-group row mb-0">
+                        <input name="image" type="file"/>
+                     
+                        @error('image')
+                          <span style="color:#ff0000">
+                             {{ $message }}
+                          </span>
+                        @enderror
+                          
+                        <div class="form-group row mb-0 mt-2">
                             <div class="col-md-8 offset-md-4">
                               <button id ="reg" type="submit" class="btn btn-primary" onclick="snipper()">
                                     Tạo
@@ -56,10 +67,29 @@
         </div>
     </div>
 </div>
-
+</div>
 <button id="myP" class="btn btn-primary" type="button" disabled hidden>
   <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
   Đang tạo...
 </button>
+<script>
+  Dropzone.options.myDropzone = {
+    url: "",
+    autoProcessQueue: false,
+    uploadMultiple: true,
+        parallelUploads: 100,
+        maxFiles: 100,
+        acceptedFiles: "image/*",
+init: function() {
+        var myDropzone = this;
 
+        // Here's the change from enyo's tutorial...
+
+        $("#submit-all").click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            myDropzone.processQueue();
+        }); 
+    };
+</script>
 @endsection

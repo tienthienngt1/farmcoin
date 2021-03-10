@@ -1,4 +1,4 @@
-<div>
+<div class="headline load-hidden">
   <nav class="navbar navbar-expand-md navbar-light shadow">
     <div class="container-fluid">
       <button class="navbar-toggler " type="button" data-toggle="collapse" onclick="openNav()" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -31,7 +31,10 @@
                 </div>
               </center>
                 @else
-                <div class=" row align-items-center mr-1"><h5>Level: 59 | Tài sản: 10000₫</h5></div>
+                <div class=" row align-items-center mr-1">
+                  <h5>Level: {{$user->level}} | Tài sản: {{json_decode($user->money)->balance}}TH
+                  </h5>
+                  </div>
                   <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                     {!! Avatar::create(Auth::user()->name)->setFontSize(20)->setDimension(60)->toSvg() !!}
                   </a>

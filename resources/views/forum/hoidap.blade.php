@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="body2 load-hidden">
      <a class="text-primary" href="{{ route('forum') }}">Forum</a>&nbsp/&nbsp<a class="text-primary" href="/forum/1">Hỏi đáp</a>
     <div class="card bg-none mt-5 shadow">
       @isset($id)
@@ -34,5 +35,6 @@
     <div class="d-flex justify-content-center">
        {!! $data->links() !!}
     </div>
+  </div>
 @endsection
       

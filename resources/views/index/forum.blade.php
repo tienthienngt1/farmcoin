@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container-fluid">
+<div class="container-fluid body3 load-hidden" >
     <div class="card bg-none mt-5">
       <div class="card-header">
         <h1>Chuyên mục</h1>

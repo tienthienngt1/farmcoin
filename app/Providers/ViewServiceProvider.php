@@ -28,6 +28,7 @@ class ViewServiceProvider extends ServiceProvider
         view::composer(['home.farm','home.bag','home.shop'],'App\Http\ViewComposers\GetVetComposer');
         view::composer('home.farm','App\Http\ViewComposers\GetFarmComposer');
         view::composer('home.bag','App\Http\ViewComposers\GetBagComposer');
-        view::composer('home.shop','App\Http\ViewComposers\GetPetComposer');
+        view::composer(['home.shop', 'home.petWarehouse' , 'home.pet'],'App\Http\ViewComposers\GetPetComposer');
+        view::composer(['home.petWarehouse', 'home.pet'],'App\Http\ViewComposers\GetPetWarehouseComposer');
     } 
 }

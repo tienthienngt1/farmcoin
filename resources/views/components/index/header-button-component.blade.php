@@ -1,5 +1,5 @@
 
-<div class="row justify-content-center">
+<div class="row justify-content-center body1 load-hidden">
 <nav class="navbar navbar-expand-md mt-4">
   <div class="collapse navbar-collapse p-3">
     <!-- left Side Of Navbar -->
@@ -12,7 +12,7 @@
             </a>
           </li>
           <li>
-            <a class="nav-link" href="{{ route('new') }}"> <button type="button" class="btn btn-primary"><i class="fas fa-newspaper" style="margin-right:5px"></i>Tin tức</button>
+            <a class="nav-link" href="/home/withdraw"> <button type="button" class="btn btn-primary"><i class="fas fa-newspaper" style="margin-right:5px"></i>Rút Tiền</button>
             </a>
           </li>
           <li>

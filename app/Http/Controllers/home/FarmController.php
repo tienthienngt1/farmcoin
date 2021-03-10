@@ -90,14 +90,16 @@ class FarmController extends Controller
     public function handleHarvest($request, $id)
     {
       $field = $this->getField($id);
+      if($field === null){
+        return $this->redirectFarm();
+      }
       $nameVet = $this->getRecordVet($field)->name;
-      
       if($field === null){
         return $this->redirectFarm();
       }
       
       if($this->getIdVetBag($field) === null){
-        $data = [
+        $data1 = [
           'bag->vet->'.$field => json_encode([
              'cost' => $this->getRecordVet($field)->sell,
              'path' => $this->getRecordVet($field)->icon,
@@ -106,7 +108,7 @@ class FarmController extends Controller
           ]),
         ];
       }else{
-        $data = [
+        $data1 = [
           'bag->vet->'.$field => json_encode([
              'cost' => $this->getRecordVet($field)->sell,
              'path' => $this->getRecordVet($field)->icon,
@@ -115,17 +117,20 @@ class FarmController extends Controller
           ]),
         ];
       }
+      $data2 = [
+        'exp' => $this->getUser()->exp + $this->getRecordVet($field)->exp,
+        'farm->farm1s->field'.$id => null,
+        'farm->farm1s->field'.$id.'Time' => null,
+        
+      ];
+      $data = array_merge($data1,$data2);
       
       $this->updateUser($data);
       $this->updateUser([
-        'farm->farm1s->field'.$id => null,
-        'farm->farm1s->field'.$id.'Time' => null,
-      ]);
-      $this->updateUser([
-        'exp' => $this->getRecordVet($field)->exp,
+        'level' => $this->getLevel($this->getUser()->exp),  
       ]);
       
-      Session::flash('notify','Thu hoạch thành công');
+      Session::flash('notify','Thu hoạch thành công. Bạn nhận được '.$this->getRecordVet($field)->exp.' exp');
       return $this->redirectFarm();
     }
    

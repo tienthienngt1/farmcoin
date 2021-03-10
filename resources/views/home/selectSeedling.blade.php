@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container-fluid">
+<div class="container-fluid body2 load-hidden">
   <a class="mt_5" href="{{ route('home.farm') }}">
       <image src="{{ asset('images/exit.png') }}" tittle="bag" width="14%"/>
 </a>

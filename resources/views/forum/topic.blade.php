@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="card">
+<div class="card body3 load-hidden">
   
   <a class="text-primary p-3" href="/forum/{{ request ()->route('id') }}"><i class="fas mr-2 fa-angle-double-left"></i>Quay về</a>
   

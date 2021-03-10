@@ -1,5 +1,5 @@
 
-<div>
+<div class="body3 load-hidden">
   <div style="height:100px">
     <a href="{{ route('home') }}">
           <image src="{{ asset('images/exit.png') }}" tittle="bag" width="14%"/>

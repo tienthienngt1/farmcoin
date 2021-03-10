@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container-fluid">
+<div class="container-fluid body2 load-hidden">
   <a class="mt_5" href="{{ route('home') }}">
       <image src="{{ asset('images/exit.png') }}" tittle="bag" width="14%"/>
   </a>
@@ -40,7 +40,7 @@
           @endisset
         @endforeach
         @if($flag === false)
-        <div class="justify-content-center row" style="opacity:40%">
+        <div class="justify-content-center row" style="opacity:0.4">
           Không có vật phẩm
         </div>
         @endif
